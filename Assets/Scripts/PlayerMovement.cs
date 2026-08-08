@@ -80,4 +80,12 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new(gameManager.speed * 200f, 0f));
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PowerOrb"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
