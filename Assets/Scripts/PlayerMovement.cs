@@ -13,6 +13,10 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer playerSprite;
 
+    private BoxCollider2D boxCollider;
+
+    private float originalBoxOffset;
+
     public float horizontalSpeed = 4f;
     public float jumpForce = 5f;
 
@@ -26,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerSprite = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        originalBoxOffset = Mathf.Abs(boxCollider.offset.x);
     }
 
     // Update is called once per frame
@@ -42,14 +48,22 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool(movingHash, horizontalInput != 0);
 
+        Vector2 currentBoxOffset = boxCollider.offset;
         // Mudar direção do player dependendo se ele estiver indo pra esquerda ou direita
         if (horizontalInput > 0f)
         {
             playerSprite.flipX = false;
+
+            currentBoxOffset.x = originalBoxOffset;
+
+            boxCollider.offset = currentBoxOffset;
         }
         else if (horizontalInput < 0f)
         {
             playerSprite.flipX = true;
+            currentBoxOffset.x = -originalBoxOffset;
+
+            boxCollider.offset = currentBoxOffset;
         }
     }
 
