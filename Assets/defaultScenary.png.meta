@@ -113,8 +113,8 @@ TextureImporter:
       name: defaultScenary_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 40
+        x: 31
+        y: 31
         width: 4
         height: 4
       alignment: 0
@@ -139,19 +139,19 @@ TextureImporter:
       name: defaultScenary_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 34
         y: 40
-        width: 4
+        width: 6
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -2, y: -2}
-        - {x: 2, y: -2}
-        - {x: 2, y: -1}
-        - {x: -2, y: -1}
+      - - {x: -3, y: -2}
+        - {x: 3, y: -2}
+        - {x: 3, y: -1}
+        - {x: -3, y: -1}
       tessellationDetail: 0.52
       bones: []
       spriteID: 89278800db484b246af3ed8c2e5c40df
@@ -176,6 +176,7 @@ TextureImporter:
       - - {x: -2, y: -2}
         - {x: 2, y: -2}
         - {x: 2, y: -1}
+        - {x: 0, y: -1}
         - {x: -2, y: -1}
       tessellationDetail: 0.52
       bones: []
@@ -260,20 +261,27 @@ TextureImporter:
       name: defaultScenary_6
       rect:
         serializedVersion: 2
-        x: 16
+        x: 15
         y: 36
-        width: 4
+        width: 5
         height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 0, y: 1}
-        - {x: -1, y: 0}
+      outline:
+      - - {x: -1, y: 2}
+        - {x: -2, y: 1}
         - {x: -2, y: -2}
         - {x: 2, y: -2}
         - {x: 2, y: 2}
+      physicsShape:
+      - - {x: 1.5, y: 2}
+        - {x: 0.5, y: 1}
+        - {x: -0.5, y: 0}
+        - {x: -1.5, y: -1}
+        - {x: -2.5, y: -2}
+        - {x: 2.5, y: -2}
+        - {x: 2.5, y: 2}
       tessellationDetail: 0.52
       bones: []
       spriteID: 0af9b3f96c143954a97b5819159166c3
@@ -676,8 +684,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: -2, y: 1}
+        - {x: -2, y: -2}
+        - {x: 2, y: -2}
+        - {x: 2, y: 1}
+      tessellationDetail: 0.54
       bones: []
       spriteID: 49c058cd74d8d8e4da0cb3543be2a8cd
       internalID: 626890225

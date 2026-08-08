@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
         originalBoxOffset = Mathf.Abs(boxCollider.offset.x);
     }
 
-    // Update is called once per frame
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
