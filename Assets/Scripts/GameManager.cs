@@ -1,5 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +12,17 @@ public class GameManager : MonoBehaviour
 
     private float t;
 
+    public Text fpsText;
+    private int fps;
+
     void Awake()
     {
         movObjs = GameObject.FindGameObjectsWithTag("MovingObject");
+    }
+
+    void Start()
+    {
+        StartCoroutine(FPSText());
     }
     void Update()
     {
@@ -31,6 +41,16 @@ public class GameManager : MonoBehaviour
 
             movObj.transform.position = pos;
 
+        }
+    }
+
+    IEnumerator FPSText()
+    {
+        while (true)
+        {
+            fps = (int)(1f / Time.unscaledDeltaTime);
+            fpsText.text = $"FPS: {fps}";
+            yield return new WaitForSecondsRealtime(1.5f);
         }
     }
 }
