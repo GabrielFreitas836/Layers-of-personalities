@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     // Usando hash melhora a performance de executar a transição entre as animações
     private int movingHash = Animator.StringToHash("isMoving");
 
+    private SpriteRenderer playerSprite;
+
     public float horizontalSpeed = 4f;
     public float jumpForce = 5f;
 
@@ -23,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerSprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -38,6 +41,16 @@ public class PlayerMovement : MonoBehaviour
         isOnGround = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         animator.SetBool(movingHash, horizontalInput != 0);
+
+        // Mudar direção do player dependendo se ele estiver indo pra esquerda ou direita
+        if (horizontalInput > 0f)
+        {
+            playerSprite.flipX = false;
+        }
+        else if (horizontalInput < 0f)
+        {
+            playerSprite.flipX = true;
+        }
     }
 
     void FixedUpdate()
