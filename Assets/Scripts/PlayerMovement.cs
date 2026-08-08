@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private GameManager gameManager;
     private Animator animator;
 
     // Usando hash melhora a performance de executar a transição entre as animações
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerSprite = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         originalBoxOffset = Mathf.Abs(boxCollider.offset.x);
@@ -69,5 +71,13 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new(horizontalInput * horizontalSpeed, rb.velocity.y);
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("MovingObject") && horizontalInput == 0)
+        {
+            rb.AddForce(new(gameManager.speed * 200f, 0f));
+        }
     }
 }
