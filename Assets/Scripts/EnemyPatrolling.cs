@@ -6,13 +6,23 @@ public class EnemyPatrolling : MonoBehaviour
     public Transform[] patrolPoints;
 
     private int currentPointIndex = 0;
-    private NavMeshAgent agent;
+
+    [HideInInspector]
+    public NavMeshAgent agent;
 
     public Enemy enemy;
+
+    [HideInInspector]
+    public Transform playerTransform;
+
+    [HideInInspector]
+    public Transform enemyTransform;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        enemyTransform = GetComponent<Transform>();
     }
 
     void Start()
@@ -29,6 +39,18 @@ public class EnemyPatrolling : MonoBehaviour
         {
             currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
             agent.SetDestination(patrolPoints[currentPointIndex].position);
+            enemy.renderer.flipX = !enemy.renderer.flipX;
+            
+        }
+
+        if (Mathf.Abs(playerTransform.position.x) - Mathf.Abs(enemyTransform.position.x) >= -enemy.data.rangeAttack)
+        {
+
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
         }
     }
 }

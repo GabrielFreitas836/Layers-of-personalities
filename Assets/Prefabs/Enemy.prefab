@@ -64,6 +64,37 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!1 &5403217498299528483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2312211783029292863}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2312211783029292863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403217498299528483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.58, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4738845960769640603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8035938623332060540
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +108,7 @@ GameObject:
   - component: {fileID: 8918516301401449641}
   - component: {fileID: 8998365248980519928}
   - component: {fileID: 5265218887540712312}
+  - component: {fileID: 2203902205172929532}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -96,7 +128,8 @@ Transform:
   m_LocalPosition: {x: 0.91080093, y: 0.79, z: 0.05969055}
   m_LocalScale: {x: 2.4419982, y: 2.170976, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2312211783029292863}
   m_Father: {fileID: 6969211565090428315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8945615252266856504
@@ -245,3 +278,17 @@ NavMeshAgent:
   m_BaseOffset: 0.5000001
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2203902205172929532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035938623332060540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4555577401476454f92dc28f814cc50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 6556265888021880938, guid: 6fa91f5f6deab934593ca269ed8805ce, type: 3}
+  firePoint: {fileID: 5403217498299528483}
