@@ -16,4 +16,5 @@ MonoBehaviour:
   enemySpeed: 1
   enemyHealth: 90
   enemyDamage: 6
+  rangeAttack: 6
   enemyPower: 2
