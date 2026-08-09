@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool(movingHash, horizontalInput != 0);
 
         Vector2 currentBoxOffset = boxCollider.offset;
+        
         // Mudar direção do player dependendo se ele estiver indo pra esquerda ou direita
         if (horizontalInput > 0f)
         {
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("MovingObject") && horizontalInput == 0)
         {
-            rb.AddForce(new(gameManager.speed * 200f, 0f));
+            rb.AddForce(new(gameManager.speed * 180f, 0f));
         }
     }
 
