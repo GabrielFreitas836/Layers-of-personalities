@@ -43,7 +43,9 @@ public class EnemyPatrolling : MonoBehaviour
             
         }
 
-        if (Mathf.Abs(playerTransform.position.x) - Mathf.Abs(enemyTransform.position.x) >= -enemy.data.rangeAttack)
+        if (Mathf.Abs(playerTransform.position.x) - Mathf.Abs(enemyTransform.position.x) >= -enemy.data.rangeAttack &&
+            -0.1f < Mathf.Abs(playerTransform.position.y) - Mathf.Abs(enemyTransform.position.y) &&
+            Mathf.Abs(playerTransform.position.y) - Mathf.Abs(enemyTransform.position.y) <= 0.5f)
         {
 
             agent.isStopped = true;
