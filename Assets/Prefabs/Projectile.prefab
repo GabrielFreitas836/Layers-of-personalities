@@ -161,9 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd1742d775746b439ea5b790ecce771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
   rb: {fileID: -7044218375511760480}
-  enemy: {fileID: 0}
   projectileSprites:
   - {fileID: 21300000, guid: d8871ca0725661c4da66e6f8ef1c2118, type: 3}
   - {fileID: 21300000, guid: 4c219c7ae4b8f124ca6fbad7bcdb743f, type: 3}
