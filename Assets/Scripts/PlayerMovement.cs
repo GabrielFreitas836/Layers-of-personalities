@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
     private bool isOnGround;
+
+    [HideInInspector]
+    public bool isKnockedBack = false;
 
     void Awake()
     {
@@ -71,7 +76,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new(horizontalInput * horizontalSpeed, rb.velocity.y);
+        if (!isKnockedBack)
+        {
+            rb.velocity = new(horizontalInput * horizontalSpeed, rb.velocity.y);
+        }
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -84,9 +92,31 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        float direction = playerSprite.flipX ? 1f : -1f;
+
         if (collision.gameObject.CompareTag("PowerOrb"))
         {
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("EnemySprite"))
+        {
+            KnockBack(direction);
+        }
+    }
+
+    public void KnockBack(float direction)
+    {
+        isKnockedBack = true;
+
+        rb.AddForce(new(20f * direction, 8f), ForceMode2D.Impulse);
+
+        StartCoroutine(EndKnockBack());
+    }
+
+    IEnumerator EndKnockBack()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isKnockedBack = false;
     }
 }

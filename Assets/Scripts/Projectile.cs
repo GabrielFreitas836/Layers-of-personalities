@@ -7,11 +7,15 @@ public class Projectile : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    private Rigidbody2D playerRb;
+
     private GameObject[] enemies;
     private Enemy enemy;
 
     private EnemyPatrolling enemyPatrolling;
     private SpriteRenderer sprite;
+
+    private float direction;
 
     public Sprite[] projectileSprites;
 
@@ -19,6 +23,7 @@ public class Projectile : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -57,7 +62,7 @@ public class Projectile : MonoBehaviour
             {
                 var shooter = enemies[i].GetComponentInChildren<ShootingProjectiles>();
 
-                float direction = 1f;
+                direction = 1f;
                 if (shooter != null)
                 {
                     direction = shooter.direction;
@@ -67,7 +72,14 @@ public class Projectile : MonoBehaviour
                 break;
             }
         }
+    }
 
-        
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerMovement>().KnockBack(direction);
+            Destroy(gameObject);
+        }
     }
 }
