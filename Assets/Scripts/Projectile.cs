@@ -7,8 +7,6 @@ public class Projectile : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    private Rigidbody2D playerRb;
-
     private GameObject[] enemies;
     private Enemy enemy;
 
@@ -19,11 +17,13 @@ public class Projectile : MonoBehaviour
 
     public Sprite[] projectileSprites;
 
+    private GameManager gameManager;
+
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     void Start()
@@ -79,6 +79,7 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerMovement>().KnockBack(direction);
+            gameManager.TakeDamage(enemy.data.enemyDamage);
             Destroy(gameObject);
         }
     }

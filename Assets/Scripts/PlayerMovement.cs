@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -30,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector]
     public bool isKnockedBack = false;
+    
+    [HideInInspector]
+    public bool dying = false;
 
     void Awake()
     {
@@ -76,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isKnockedBack)
+        if (!isKnockedBack && !dying)
         {
             rb.velocity = new(horizontalInput * horizontalSpeed, rb.velocity.y);
         }
@@ -101,7 +103,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("EnemySprite"))
         {
-            KnockBack(direction);
+            if (collision.gameObject.TryGetComponent<Enemy>(out var enemy))
+            {
+                KnockBack(direction);
+                gameManager.TakeDamage(enemy.data.enemyDamage);
+            }
         }
     }
 

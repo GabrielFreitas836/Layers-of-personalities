@@ -15,21 +15,40 @@ public class GameManager : MonoBehaviour
     public Text fpsText;
     private int fps;
 
+    public int maxPlayerHealth = 100;
+
+    private int currentHealth;
+
+    public HealthBar healthBar;
+
+    private Animator animator;
+
+    private int dyingHash = Animator.StringToHash("isDying");
+
+    public Rigidbody2D playerRb;
+
+    private PlayerMovement playerMovement;
+
     void Awake()
     {
         movObjs = GameObject.FindGameObjectsWithTag("MovingObject");
+        animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     void Start()
     {
         StartCoroutine(FPSText());
+
+        currentHealth = maxPlayerHealth;
+        healthBar.SetMaxHealth(maxPlayerHealth);
     }
     void Update()
     {
         // Resetar level atual ao apertar R
         if (Input.GetKey(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            ResetLevel();
         }
 
         t += Time.deltaTime * speed;
@@ -42,8 +61,24 @@ public class GameManager : MonoBehaviour
             movObj.transform.position = pos;
 
         }
+
+        if (currentHealth == 0)
+        {
+            playerMovement.dying = true;
+            StartCoroutine(PlayerDying());
+        }
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    private void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     IEnumerator FPSText()
     {
         while (true)
@@ -52,5 +87,15 @@ public class GameManager : MonoBehaviour
             fpsText.text = $"FPS: {fps}";
             yield return new WaitForSecondsRealtime(1.5f);
         }
+    }
+
+    IEnumerator PlayerDying()
+    {
+        animator.SetBool(dyingHash, true);
+        playerRb.bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(1f);
+        playerMovement.dying = false;
+        playerRb.bodyType = RigidbodyType2D.Dynamic;
+        ResetLevel();
     }
 }
