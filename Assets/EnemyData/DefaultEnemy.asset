@@ -15,6 +15,6 @@ MonoBehaviour:
   enemySprite: {fileID: 21300000, guid: 8a09571f59f0ed149ac4ae61c1949374, type: 3}
   enemySpeed: 2
   enemyHealth: 50
-  enemyDamage: 2
+  enemyDamage: 10
   rangeAttack: 7.5
   enemyPower: 0
