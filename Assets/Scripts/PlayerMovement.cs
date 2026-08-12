@@ -94,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new(gameManager.speed * 180f, 0f));
         }
+
+        if (collision.gameObject.CompareTag("Teleport"))
+        {
+            StartCoroutine(Teleport());
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -150,5 +155,11 @@ public class PlayerMovement : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
+    }
+
+    IEnumerator Teleport()
+    {
+        yield return new WaitForSeconds(1.25f);
+        transform.position = new(17.78387f, -1.77533f);
     }
 }
