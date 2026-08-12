@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     
     [HideInInspector]
     public bool dying = false;
+
+    public Text levelCompleteText;
 
     void Awake()
     {
@@ -99,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("PowerOrb"))
         {
             Destroy(collision.gameObject);
+            StartCoroutine(LevelCompleted());
         }
 
         if (collision.gameObject.CompareTag("EnemySprite"))
@@ -133,5 +138,17 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         isKnockedBack = false;
+    }
+
+    IEnumerator LevelCompleted()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        yield return new WaitForSeconds(2f);
+        levelCompleteText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 }
