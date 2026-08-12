@@ -82,5 +82,10 @@ public class Projectile : MonoBehaviour
             gameManager.TakeDamage(enemy.data.enemyDamage);
             Destroy(gameObject);
         }
+
+        if (other.gameObject.name == "DefaultTileMap")
+        {
+            Destroy(gameObject);
+        }
     }
 }
