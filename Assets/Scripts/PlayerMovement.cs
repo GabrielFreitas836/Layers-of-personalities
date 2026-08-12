@@ -111,6 +111,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("DeathSpot"))
+        {
+            gameManager.currentHealth = 0;
+            gameManager.healthBar.SetHealth(gameManager.currentHealth);
+        }
+    }
+
     public void KnockBack(float direction)
     {
         isKnockedBack = true;

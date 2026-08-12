@@ -9,6 +9,7 @@ TagManager:
   - PowerOrb
   - Enemy
   - EnemySprite
+  - DeathSpot
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
 
     public int maxPlayerHealth = 100;
 
-    private int currentHealth;
+    [HideInInspector]
+    public int currentHealth;
 
     public HealthBar healthBar;
 
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     public Rigidbody2D playerRb;
 
     private PlayerMovement playerMovement;
+
+    public Text gameOverText;
 
     void Awake()
     {
@@ -93,9 +96,11 @@ public class GameManager : MonoBehaviour
     {
         animator.SetBool(dyingHash, true);
         playerRb.bodyType = RigidbodyType2D.Static;
+        gameOverText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         playerMovement.dying = false;
         playerRb.bodyType = RigidbodyType2D.Dynamic;
+        gameOverText.gameObject.SetActive(false);
         ResetLevel();
     }
 }
