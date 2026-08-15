@@ -87,6 +87,11 @@ public class PlayerMovement : MonoBehaviour
         if (!isKnockedBack && !dying)
         {
             rb.velocity = new(horizontalInput * horizontalSpeed, rb.velocity.y);
+
+            /*if (rb.velocity.magnitude > 0.1f && isOnGround)
+            {
+                StartCoroutine(WalkingSFX());
+            }*/
         }
     }
 
@@ -163,5 +168,12 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(1.25f);
         transform.position = new(17.78387f, -1.77533f);
+    }
+
+    IEnumerator WalkingSFX()
+    {
+        yield return new WaitForSeconds(1f);
+        AudioManager.instance.PlaySFX(AudioManager.instance.walkSFX);
+        yield return new WaitForSeconds(5f);
     }
 }
