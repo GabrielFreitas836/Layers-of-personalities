@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
     private AudioSource audioSource;
 
     [Header("Music")]
-    public AudioClip startMenuMusic;
     public AudioClip levelsMusic;
     void Awake()
     {
@@ -33,7 +32,7 @@ public class AudioManager : MonoBehaviour
         switch (scene.name)
         {
             case "StartScene":
-                PlayMusic(startMenuMusic);
+                PlayMusic(null);
                 break;
             case "Level01":
                 PlayMusic(levelsMusic);
@@ -42,6 +41,7 @@ public class AudioManager : MonoBehaviour
                 PlayMusic(levelsMusic);
                 break;
             case "CreditsScene":
+                PlayMusic(null);
                 break;
         }
     }
