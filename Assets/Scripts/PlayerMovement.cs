@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            AudioManager.instance.PlaySFX(AudioManager.instance.jumpSFX);
         }
 
         isOnGround = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);

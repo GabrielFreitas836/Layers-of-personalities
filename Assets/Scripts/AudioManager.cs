@@ -5,10 +5,15 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    private AudioSource audioSource;
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
 
     [Header("Music")]
     public AudioClip levelsMusic;
+
+    [Header("SFX")]
+    public AudioClip walkSFX;
+    public AudioClip jumpSFX;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -20,9 +25,9 @@ public class AudioManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        audioSource = GetComponent<AudioSource>();
 
-        audioSource.volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        musicSource.volume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        sfxSource.volume = PlayerPrefs.GetFloat("SFXVolume", 1f);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -48,24 +53,41 @@ public class AudioManager : MonoBehaviour
 
     void PlayMusic(AudioClip clip)
     {
-        if (audioSource.clip == clip)
+        if (musicSource.clip == clip)
         {
             return;
         }
 
-        audioSource.clip = clip;
-        audioSource.Play();
+        musicSource.clip = clip;
+        musicSource.Play();
     }
-    public void SetVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
-        audioSource.volume = volume;
+        musicSource.volume = volume;
         PlayerPrefs.SetFloat("MusicVolume", volume);
         PlayerPrefs.Save();
     }
 
-    public void GetVolume()
+    public float GetMusicVolume()
     {
-        PlayerPrefs.GetFloat("MusicVolume", 1f);
+        return PlayerPrefs.GetFloat("MusicVolume", 1f);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    public float GetSFXVolume()
+    {
+        return PlayerPrefs.GetFloat("SFXVolume", 1f);
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        sfxSource.PlayOneShot(clip);
     }
 
     void OnDestroy()

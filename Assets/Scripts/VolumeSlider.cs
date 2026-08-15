@@ -9,6 +9,13 @@ public class VolumeSlider : MonoBehaviour
     {
         volumeSlider = GetComponent<Slider>();
 
-        volumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        if (gameObject.name == "MusicSlider")
+        {
+            volumeSlider.value =  AudioManager.instance.GetMusicVolume();
+        }
+        else if (gameObject.name == "SFXSlider")
+        {
+            volumeSlider.value = AudioManager.instance.GetSFXVolume();
+        }
     }
 }
