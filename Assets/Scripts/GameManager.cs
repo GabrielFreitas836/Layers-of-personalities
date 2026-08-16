@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public Text gameOverText;
 
+    public Text currentLevelText;
+
     void Awake()
     {
         movObjs = GameObject.FindGameObjectsWithTag("MovingObject");
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
 
         currentHealth = maxPlayerHealth;
         healthBar.SetMaxHealth(maxPlayerHealth);
+
+        currentLevelText.text = $"{SceneManager.GetActiveScene().name}";
     }
     void Update()
     {
